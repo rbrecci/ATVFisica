@@ -1,19 +1,4 @@
-/* Roteiro da HQ "A Viagem pelo Mundo dos Átomos".
-   Fonte única de verdade: o app monta tudo a partir daqui.
 
-   Posicionamento de balão: cada balão vive DENTRO de um quadro (painel).
-   "painel" é o índice do quadro na página, "ancora" é o canto onde ele encosta.
-   Âncoras: tl tc tr / ml mc mr / bl bc br. "w" é a largura em % do quadro.
-   Isso é bem mais robusto que coordenada absoluta: se a arte variar um pouco,
-   o balão continua encostado no canto certo. */
-
-/* Retângulo de cada quadro, em % da página.
-
-   ATENÇÃO: estes números NÃO são chutados. A arte gerada não segue um grid
-   exato (cada página saiu com proporções um pouco diferentes), então os
-   valores abaixo foram medidos pixel a pixel pelas calhas brancas, com
-   prompts/detectar-quadros.py. Se alguma página for regerada, rode o script
-   de novo e cole a saída aqui, senão o balão cai na calha entre os quadros. */
 const QUADROS = {
   grecia:     [{ x: 4.6, y: 3.8, w: 91.0, h: 51.5 }, { x: 4.6, y: 56.2, w: 46.5, h: 40.2 }, { x: 52.1, y: 56.2, w: 43.4, h: 40.2 }],
   dalton:     [{ x: 4.5, y: 4.3, w: 52.9, h: 36.7 }, { x: 58.6, y: 4.3, w: 36.9, h: 36.7 }, { x: 4.5, y: 41.9, w: 91.1, h: 54.4 }],
@@ -23,7 +8,6 @@ const QUADROS = {
   bohr:       [{ x: 4.6, y: 4.3, w: 44.6, h: 45.0 }, { x: 50.8, y: 4.3, w: 44.6, h: 45.0 }, { x: 4.6, y: 50.5, w: 90.8, h: 45.8 }],
   tecnologia: [{ x: 4.6, y: 4.8, w: 44.6, h: 44.5 }, { x: 50.8, y: 4.8, w: 44.6, h: 44.5 }, { x: 4.6, y: 50.9, w: 90.8, h: 45.9 }],
   conclusao:  [{ x: 4.6, y: 4.3, w: 90.8, h: 45.0 }, { x: 4.6, y: 50.5, w: 90.8, h: 45.8 }],
-  // página sem quadros (capa, créditos)
   FULL:       [{ x: 0, y: 0, w: 100, h: 100 }]
 };
 
@@ -106,19 +90,16 @@ const PERSONAGENS = {
 
 const PAGINAS = [
 
-  /* ------------------------------------------------ 1. CAPA */
   {
     id: 'capa', tipo: 'capa', img: 'paginas/p01-capa.jpg',
     rotulo: 'Capa'
   },
 
-  /* ---------------------------------------- 2. PERSONAGENS */
   {
     id: 'personagens', tipo: 'personagens',
     rotulo: 'Personagens'
   },
 
-  /* --------------------------------------------- 3. GRÉCIA */
   {
     id: 'grecia', tipo: 'quadrinho', img: 'paginas/p03-grecia.jpg',
     layout: 'grecia', rotulo: 'Grécia, 400 a.C.',
@@ -153,7 +134,6 @@ const PAGINAS = [
     }
   },
 
-  /* --------------------------------------------- 4. DALTON */
   {
     id: 'dalton', tipo: 'quadrinho', img: 'paginas/p04-dalton.jpg',
     layout: 'dalton', rotulo: 'Dalton, 1803',
@@ -186,7 +166,6 @@ const PAGINAS = [
     }
   },
 
-  /* -------------------------------------------- 5. THOMSON */
   {
     id: 'thomson', tipo: 'quadrinho', img: 'paginas/p05-thomson.jpg',
     layout: 'thomson', rotulo: 'Thomson, 1897',
@@ -221,7 +200,6 @@ const PAGINAS = [
     }
   },
 
-  /* ----------------------------------------- 6. RUTHERFORD */
   {
     id: 'rutherford', tipo: 'quadrinho', img: 'paginas/p06-rutherford.jpg',
     layout: 'rutherford', rotulo: 'Rutherford, 1911',
@@ -252,7 +230,6 @@ const PAGINAS = [
     }
   },
 
-  /* -------------------------------------- 7. MODELO NUCLEAR */
   {
     id: 'nuclear', tipo: 'quadrinho', img: 'paginas/p07-nuclear.jpg',
     layout: 'nuclear', rotulo: 'O vazio e o defeito',
@@ -283,7 +260,6 @@ const PAGINAS = [
     }
   },
 
-  /* ----------------------------------------------- 8. BOHR */
   {
     id: 'bohr', tipo: 'quadrinho', img: 'paginas/p08-bohr.jpg',
     layout: 'bohr', rotulo: 'Bohr, 1913',
@@ -316,7 +292,6 @@ const PAGINAS = [
     }
   },
 
-  /* ---------------------------------------- 9. TECNOLOGIA */
   {
     id: 'tecnologia', tipo: 'quadrinho', img: 'paginas/p09-tecnologia.jpg',
     layout: 'tecnologia', rotulo: 'Hoje',
@@ -351,7 +326,6 @@ const PAGINAS = [
     }
   },
 
-  /* ----------------------------------------- 10. CONCLUSÃO */
   {
     id: 'conclusao', tipo: 'quadrinho', img: 'paginas/p10-conclusao.jpg',
     layout: 'conclusao', rotulo: 'Conclusão',
@@ -377,7 +351,6 @@ const PAGINAS = [
     }
   },
 
-  /* ------------------------------------------ 11. CRÉDITOS */
   {
     id: 'creditos', tipo: 'creditos', img: 'paginas/p11-creditos.jpg',
     rotulo: 'Créditos'

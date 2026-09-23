@@ -1,8 +1,3 @@
-/* Leitor da HQ. Monta cada página a partir do roteiro e revela os
-   balões um a um, como quem lê quadrinho de verdade.
-
-   Todo texto injetado vem do roteiro.js, que é estático e escrito por nós.
-   Não há entrada de usuário em lugar nenhum desta tela. */
 
 (function () {
   'use strict';
@@ -22,8 +17,6 @@
   let revelados = 0;
   let baloes = [];
 
-  /* ---------------------------------------------- utilidades */
-
   function el(tag, classe, texto) {
     const n = document.createElement(tag);
     if (classe) n.className = classe;
@@ -31,7 +24,6 @@
     return n;
   }
 
-  /* várias linhas de texto sem recorrer a innerHTML */
   function linhas(pai, arr) {
     arr.forEach((t, i) => {
       if (i) pai.appendChild(document.createElement('br'));
@@ -45,9 +37,6 @@
     return quadros[indice] || quadros[0];
   }
 
-  /* Converte âncora + quadro em posição CSS.
-     Vertical:   t (topo) | m (meio) | b (base)
-     Horizontal: l (esq)  | c (centro) | r (dir) */
   function posicionar(node, quadro, b) {
     const v = b.ancora[0], h = b.ancora[1];
     const insetX = 1.8, insetY = 2.0;
@@ -73,8 +62,6 @@
     }
   }
 
-  /* O rabicho aponta para dentro do quadro, longe do canto
-     em que o balão está encostado. */
   function montarRabo(node, ancora) {
     const v = ancora[0], h = ancora[1];
     const rabo = el('span', 'rabo');
@@ -91,7 +78,6 @@
     node.appendChild(rabo);
   }
 
-  /* tom bem leve da cor do personagem, sem prejudicar a leitura */
   function mistura(hex) {
     const r = parseInt(hex.slice(1, 3), 16);
     const g = parseInt(hex.slice(3, 5), 16);
@@ -107,11 +93,6 @@
     img.alt = pag.titulo ? ('Quadrinho: ' + pag.titulo) : (pag.rotulo || '');
     return img;
   }
-
-  /* ------------------------------------------------- páginas
-     Toda função de montagem escreve no "alvo" recebido e devolve
-     a lista de balões daquela página. Assim a mesma rotina serve
-     para a leitura na tela e para a pilha de impressão.          */
 
   function montarCapa(alvo, pag) {
     alvo.appendChild(criarArte(pag));
@@ -245,8 +226,6 @@
     return montarQuadrinho(alvo, pag);
   }
 
-  /* -------------------------------------------------- render */
-
   function render() {
     const pag = PAGINAS[pagAtual];
     folha.textContent = '';
@@ -293,8 +272,6 @@
     render();
   }
 
-  /* --------------------------------------------------- índice */
-
   function montarIndice() {
     const lista = document.getElementById('lista-indice');
     lista.textContent = '';
@@ -322,8 +299,6 @@
       n.classList.toggle('atual', Number(n.dataset.i) === pagAtual);
     });
   }
-
-  /* ---------------------------------------------- transcrição */
 
   function montarTranscricao() {
     const corpo = document.getElementById('transcricao-corpo');
@@ -360,8 +335,6 @@
     });
   }
 
-  /* ------------------------------------------------- painéis */
-
   function abrir(id) {
     fecharPaineis();
     document.getElementById(id).hidden = false;
@@ -387,17 +360,6 @@
     btnNota.classList.add('ativo');
   }
 
-  /* ---------------------------------------------- impressão
-     A pilha tem as 11 páginas montadas de uma vez, com todos os balões
-     já visíveis. Ela nasce junto com a tela e fica escondida por CSS
-     (#pilha-impressao{display:none}); o papel e o modo-pdf mostram.
-
-     Montar aqui, no carregamento, e não na hora de imprimir, é o que
-     faz o Ctrl+P sair certo: mexer no DOM dentro do beforeprint deixa o
-     Edge pendurado esperando as 11 imagens que acabaram de entrar, e a
-     impressão nunca termina. Prontas de antemão, elas já estão
-     decodificadas quando o navegador pagina. */
-
   function montarPilha() {
     const pilha = el('div', 'pilha-impressao');
     pilha.id = 'pilha-impressao';
@@ -413,13 +375,6 @@
     return pilha;
   }
 
-  /* Uma armadilha aqui, e já custou caro: window.print() precisa sair
-     DENTRO do gesto do clique. Dentro de um setTimeout o navegador pode
-     engolir a chamada sem avisar.
-
-     A volta ao modo leitura não depende só do afterprint, que alguns
-     navegadores não disparam: tem o botão de voltar como saída
-     garantida. */
   function imprimirTudo() {
     if (document.body.classList.contains('modo-pdf')) return;
 
@@ -442,14 +397,9 @@
     window.print();
   }
 
-  /* Abrir com ?pdf na URL deixa a pilha à mostra e parada na tela, sem
-     chamar a impressão. É o modo usado para gerar o PDF por linha de
-     comando (gerar-pdf.ps1, Edge headless), onde não dá para clicar. */
   function modoPdf() {
     document.body.classList.add('modo-pdf');
   }
-
-  /* -------------------------------------------------- eventos */
 
   folha.addEventListener('click', () => {
     if (PAGINAS[pagAtual].tipo === 'personagens') return;
@@ -484,8 +434,6 @@
   }
 
   document.addEventListener('keydown', e => {
-    // com painel aberto, só Escape responde: senão a HQ vira de página
-    // atrás do painel enquanto a pessoa lê a transcrição
     if (algumPainelAberto()) {
       if (e.key === 'Escape') fecharPaineis();
       return;
@@ -504,7 +452,6 @@
     }
   });
 
-  // toque: arrastar para os lados vira virar de página
   let tx0 = null, ty0 = null;
   folha.addEventListener('touchstart', e => {
     tx0 = e.touches[0].clientX; ty0 = e.touches[0].clientY;
@@ -520,8 +467,6 @@
     tx0 = ty0 = null;
   }, { passive: true });
 
-
-  /* ----------------------------------------------------- init */
   montarIndice();
   montarTranscricao();
   render();
