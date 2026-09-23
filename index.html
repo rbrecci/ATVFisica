@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A Viagem pelo Mundo dos Átomos</title>
+<meta name="description" content="História em quadrinhos sobre a evolução dos modelos atômicos, de Demócrito a Bohr.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/estilo.css">
+</head>
+<body>
+
+<header class="barra">
+  <div class="barra-esq">
+    <button id="btn-indice" class="btn-icone" aria-label="Abrir índice de páginas" title="Índice (I)">
+      <span class="ico">&#9776;</span>
+    </button>
+    <div class="marca">
+      <strong>A Viagem pelo Mundo dos Átomos</strong>
+      <span id="rotulo-pagina">Capa</span>
+    </div>
+  </div>
+  <div class="barra-dir">
+    <button id="btn-nota" class="btn-texto" title="Explicação científica da página (S)">Saiba mais</button>
+    <button id="btn-tudo" class="btn-texto" title="Mostrar todos os balões da página (A)">Mostrar tudo</button>
+    <button id="btn-transcricao" class="btn-texto" title="Texto completo da HQ (T)">Transcrição</button>
+    <button id="btn-imprimir" class="btn-texto" title="Gerar PDF pela impressão">PDF</button>
+  </div>
+</header>
+
+<main id="palco">
+  <button id="nav-ant" class="seta seta-ant" aria-label="Página anterior">&#8249;</button>
+
+  <div id="folha" class="folha">
+    <!-- o app injeta aqui -->
+  </div>
+
+  <button id="nav-prox" class="seta seta-prox" aria-label="Próxima página">&#8250;</button>
+</main>
+
+<footer class="rodape">
+  <div class="progresso"><div id="progresso-barra"></div></div>
+  <div class="rodape-info">
+    <span id="contador">1 / 11</span>
+    <span class="dica" id="dica">Clique na página, use as setas do teclado ou a barra de espaço para avançar</span>
+  </div>
+</footer>
+
+<!-- Índice -->
+<aside id="painel-indice" class="painel" hidden>
+  <div class="painel-topo">
+    <h2>Índice</h2>
+    <button class="btn-fechar" data-fechar="painel-indice" aria-label="Fechar">&times;</button>
+  </div>
+  <div id="lista-indice" class="grade-indice"></div>
+</aside>
+
+<!-- Saiba mais -->
+<aside id="painel-nota" class="painel painel-nota" hidden>
+  <div class="painel-topo">
+    <h2 id="nota-titulo">Saiba mais</h2>
+    <button class="btn-fechar" data-fechar="painel-nota" aria-label="Fechar">&times;</button>
+  </div>
+  <div id="nota-corpo" class="nota-corpo"></div>
+</aside>
+
+<!-- Transcrição -->
+<aside id="painel-transcricao" class="painel painel-largo" hidden>
+  <div class="painel-topo">
+    <h2>Transcrição completa</h2>
+    <button class="btn-fechar" data-fechar="painel-transcricao" aria-label="Fechar">&times;</button>
+  </div>
+  <div id="transcricao-corpo" class="transcricao-corpo"></div>
+</aside>
+
+<div id="cortina" class="cortina" hidden></div>
+
+<script src="assets/js/roteiro.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
